@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import { IUser, UserModel } from "./types";
 
-const userScheme = new mongoose.Schema({
+const userScheme = new mongoose.Schema<IUser, UserModel>({
   name: {
     type: String,
     required: true,
@@ -46,6 +47,6 @@ userScheme.statics.findByCredentials = async (
   return user;
 };
 
-const User = mongoose.model("User", userScheme);
+const User = mongoose.model<IUser, UserModel>("User", userScheme);
 
 export default User;
