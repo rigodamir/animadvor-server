@@ -1,9 +1,22 @@
 import jwt from "jsonwebtoken";
-import { IUser } from "../models/user/types";
 import "dotenv/config";
 
-export const accessToken = (name: string) => {
-  return jwt.sign({ name: name }, process.env.ACCESS_TOKEN, {
-    expiresIn: "15m",
-  });
+export const accessToken = (userData: any) => {
+  return jwt.sign(
+    { name: userData.name, isAdmin: userData.isAdmin },
+    process.env.ACCESS_TOKEN,
+    {
+      expiresIn: "1min",
+    }
+  );
+};
+
+export const refreshToken = (userData: any) => {
+  return jwt.sign(userData, process.env.REFRESH_TOKEN);
+};
+
+export const verifyRefreshToken = (token: string) => {
+  const userData = jwt.verify(token, process.env.REFRESH_TOKEN);
+  const newToken = accessToken(userData);
+  return newToken;
 };
