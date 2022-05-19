@@ -4,9 +4,11 @@ import "dotenv/config";
 import { userRouter } from "./routers/user";
 import { animalRouter } from "./routers/animals";
 import { newsRouter } from "./routers/news";
+import cors from "cors";
 
 const port = process.env.PORT;
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use(userRouter);
