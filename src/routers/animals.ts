@@ -61,3 +61,5 @@ router.delete("/animal/:id", auth, async (req, res) => {
     res.status(500).send("Something went wrong!");
   }
 });
+
+export { router as animalRouter };
