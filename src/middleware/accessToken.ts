@@ -6,7 +6,7 @@ export const accessToken = (userData: any) => {
     { name: userData.name, isAdmin: userData.isAdmin },
     process.env.ACCESS_TOKEN,
     {
-      expiresIn: "1min",
+      expiresIn: "2h",
     }
   );
 };
